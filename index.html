@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <title>PassWord Maker</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/gh/cosmogicofficial/quantumalert@latest/minfile/quantumalert.js" charset="utf-8"></script>
+     <link rel="stylesheet" href="animate.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="Notiflix-2.7.0/src/notiflix.css" />
+<script src="Notiflix-2.7.0/src/notiflix.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<link rel="icon" href="favi.png" type="image/gif" sizes="16x16">
+</head>
+  <body>
+<div class="login-div" id="login_div">
+  <div style="margin-top: 15%;">
+     <h1 style="font-weight: bold">PassWordMaker</h1>
+   <div class="inpt-div">
+    <input  type="email" placeholder="Email..." id="email_field" />
+    <input type="password" placeholder="Password..." id="password_field" />
+  </div>
+ 
+  <button class="login-bt" onclick="login()">Login</button>
+  <br>
+  
+  <button style="height:50px;width:347px;margin-top: 10px" class="abcRioButton abcRioButtonBlue" onclick="SignInWithGoogle()"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg"><g><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></g></svg></div></div><span style="font-size:20px;line-height:48px;" class="abcRioButtonContents"><span id="not_signed_innxe85kybv2t">Sign in with Google</span></div></button>
+ </div>
+
+   </div>
+
+  <div id="user_div" style="display: none;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:70px; ">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="#"  style=" margin-top:10px">PassWordMaker</a>
+      &nbsp;&nbsp; &nbsp;&nbsp;       
+
+ 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <div class="relative" style=" margin-top:12px"><input style="width:300px;height: 55px" onkeyup="SearchList()" id="myInput" type="search" name="header_search_query" value="" placeholder="Search vault..." class="input-reset color-inherit input-focus all-animate br-pill ph4 sans-serif header-search-input ba bw1 bg-gray1 b--gray1"> <button type="submit" name="header_search_submit" class="button-reset color-inherit db o-60 absolute center-v right-1 hover-primary6"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-search fa-w-16 fa-fw"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" class=""></path></svg> <span class="sr-only">Search!</span></button></div>
+      
+            <ul style="margin-left: 50px;margin-top:10px" class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item"><a  href="#" class="link color-inherit fw6 mr5 o-60 glow" style="font-size: 20px;">Start</a></li>
+                 <li class="nav-item"><a  href="#" class="link color-inherit fw6 mr5 o-60 glow" style="font-size: 20px;">Docs</a></li>
+                  <li class="nav-item" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" title="generate"><a  href="#" class="link color-inherit fw6 mr5 o-60 glow" style="font-size: 20px;">Password Generator</a></li>
+            </ul>
+            <button  style="margin-top: 10px;font-size: 20px" type="button" onclick="openNav()" title="Open Account Navigation" class="db button-reset tl color-inherit o-60 glow outline-0-focus toggle-account-menu flex flex-column" ><svg  aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="svg-inline--fa fa-user-circle fa-w-16 fa-fw fa-lg"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" class=""></path></svg></button>
+      <!--<div class="dropdown" style="float:right;margin-top: 10px;">
+        <img 
+            id="profile-pic" 
+            src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+            class="rounded-circle z-depth-0"
+            alt="avatar image"
+            height="50"
+        />
+          <a class="navbar-brand" href="#" id="user_para4"></a>
+        <div class="dropdown-content">
+          <p id="user_para"></p>
+          <p id="user_para2"></p>
+          <p id="user_para3">*Your Personel PassWordMaker account synced on all devices</p>
+        </div>
+
+      </div>
+    </div>-->
+
+  </div>
+
+</nav>
+
+
+<div id="mySidenav" class="sidenav bg-gray9">
+  <a href="javascript:void(0)" class="closebtn cross" onclick="closeNav()">&times;</a>
+  <div class="pa4 tc relative" style = "color: white"><div class="relative z-1"><div class="mb3 blue4"><!----> <!----> <!---->         <img 
+            id="profile-pic" 
+            src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+            alt="avatar image"
+            height="40"
+        /><!----> <!----> <!----></div> <h2 class="mv0 f3 normal flex flex-column items-center"><span class="sr-only">You're signed in as </span> <span class="mb1" id = "user_para"></span> <span class="fw6" id = "user_para2"></span></h2></div> <span class="absolute absolute--fill z-0 bg-blue5 o-20"></span></div>
+  <nav><!----> <a href="#" class="link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-address-card fa-w-18 fa-fw fa-lg"><path fill="currentColor" d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z"></path></svg> <span class="ml2 white"> Account Details</span></a> 
+   <a href="#" class="link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2"><i class="far fa-university" style="font-size: 25px"></i>&nbsp; <span class="ml2 white">Bank Accounts</span></a> 
+
+   <a href="#" class="link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" title="generate"><i class="fas fa-unlock-alt"  style="font-size: 25px;margin-left: 1px"></i> <span class="ml2 white"> &nbsp;Password Generator</span></a> 
+<a href="#" class="link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2"> <i class="fas fa-credit-card-front" style="font-size: 26px"></i>&nbsp;<span class="ml2 white">Payment Cards</span></a> 
+
+
+      <a href="#" exact-active-class="bg-black" class="link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2"><i class="menuIcon fa fa-sticky-note" style="font-size: 26px"></i> &nbsp; <span class="ml2 white">Secret Notes</span></a>
+        <a href="#" exact-active-class="bg-black" class="link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="headset" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-headset fa-w-16 fa-fw fa-lg"><path fill="currentColor" d="M224 336V192.36c0-17.67-14.33-32-32-32h-48c-35.35 0-64 28.65-64 64V304c0 35.35 28.65 64 64 64h48c17.67 0 32-14.33 32-32zm-48-16h-32c-8.82 0-16-7.18-16-16v-79.64c0-8.82 7.18-16 16-16h32V320zM256 0C113.18 0 4.58 118.83 0 256v16c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16v-16c0-114.69 93.31-208 208-208s208 93.31 208 208h-.12c.08 2.43.12 165.72.12 165.72 0 23.35-18.93 42.28-42.28 42.28H320c0-26.51-21.49-48-48-48h-32c-26.51 0-48 21.49-48 48s21.49 48 48 48h181.72c49.86 0 90.28-40.42 90.28-90.28V256C507.42 118.83 398.82 0 256 0zm112 368c35.35 0 64-28.65 64-64v-79.64c0-35.35-28.65-64-64-64h-48c-17.67 0-32 14.33-32 32V336c0 17.67 14.33 32 32 32h48zm-32-159.64h32c8.82 0 16 7.18 16 16V304c0 8.82-7.18 16-16 16h-32V208.36z" class=""></path></svg> <span class="ml2 white">Support</span></a>
+
+    <button onclick="signout()" class="button-reset w-100 tl link gray7 db pv3 ph4 hover-bg-blue5 hover-blue2"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-sign-out-alt fa-w-16 fa-fw fa-lg"><path fill="currentColor" d="M272 112v51.6h-96c-26.5 0-48 21.5-48 48v88.6c0 26.5 21.5 48 48 48h96v51.6c0 42.6 51.7 64.2 81.9 33.9l144-143.9c18.7-18.7 18.7-49.1 0-67.9l-144-144C323.8 48 272 69.3 272 112zm192 144L320 400v-99.7H176v-88.6h144V112l144 144zM96 64h84c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H96c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h84c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H96c-53 0-96-43-96-96V160c0-53 43-96 96-96z" class=""></path></svg> <span class="ml2 white">Sign Out</span></button></nav>
+
+</div>
+ 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" style="text-align: center;">New Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                <div align="center">
+                    <div class="relative" style=" margin-top:12px"><input style="width:100%;height: 55px"  id="field1" type="text" name="header_search_query" value="" placeholder="Site url..." class="input-reset color-inherit input-focus all-animate br-pill ph4 sans-serif header-search-input ba bw1 bg-gray1 b--gray1"> <button type="submit" name="header_search_submit" class="button-reset color-inherit db o-60 absolute center-v right-1 hover-primary6"> <span class="sr-only">Site url...</span></button></div>
+                    <br>
+
+                    <div class="relative" style=" margin-top:12px"><input style="width:100%;height: 55px"  id="field2" type="text" name="header_search_query" value="" placeholder="Site username..." class="input-reset color-inherit input-focus all-animate br-pill ph4 sans-serif header-search-input ba bw1 bg-gray1 b--gray1"> <button type="submit" name="header_search_submit" class="button-reset color-inherit db o-60 absolute center-v right-1 hover-primary6"> <span class="sr-only">Site username...</span></button></div>
+
+                   
+               </div>
+               <br>
+
+         <input type="range" min="1" max="100" value="0" class="slider" id="myRange"  onchange="showpass()"/>
+         <p>Length: <span id="passwordlength"></span></p>
+
+          <input type="text" placeholder="Password" id="passpara" class="input" readonly/>
+
+          <div align="right" style="font-size: 28px" onclick="copyText()">
+          <i class="fas fa-copy" id = "changeicon"></i>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" onclick="StorePasswordWithSiteName()"  data-bs-dismiss="modal">Save Gold</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal2 -->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" style="text-align: center;">Generator</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+               <br>
+
+         <input type="range" min="1" max="100" value="0" class="slider" id="Range"  onchange="makepass()"/>
+
+
+          <input type="text" placeholder="Password" id="passpara2" class="input" readonly/>
+
+          	    <p>Length: <span id="passlength"></span></p>
+          <div align="right" style="font-size: 28px" onclick="copyText2()">
+          <i class="fas fa-copy" id = "changeicon2"></i>
+          </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+</script>
+         <div id="list_div" class="main-list">
+<h3>Vault: </h3>
+
+        </div>
+        <!--<div style="text-align: center;">
+                      <img 
+            id="profile-pic" 
+            src="Empty_All_Omaria.png"
+            style="
+            position: fixed;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);" 
+            alt="avatar image"
+            height="250"
+            width="250" 
+        /> 
+
+        <div class="emptyVaultText">
+              <h1>Nothing to see here</h1>
+              <p>Click 'Add item' to start organizing your vault.</p>
+            </div>
+        </div>-->
+              <div id="emptyVaultOmaria" class="emptyVaultContainer">
+        <div class="emptyVault">
+          <div class="emptyVaultWrapper">
+            <img src='Empty_All_Omaria.png'class="emptyVaultImage"/>
+            <div class="emptyVaultText">
+              <h1>Nothing to see here</h1>
+              <p>Click the 'Add item' button to start organizing your Vault.</p>
+            </div>
+               <img src='arrow.png' style="margin-left: 20%;margin-top:-20px" />
+          </div>
+        </div>
+      </div>
+        <button onclick='window.scrollTo({top: 0, behavior: "smooth"});' id="scrollBtn"><i class="fad fa-arrow-circle-up" style="color:dodgerblue; font-size:40px"></i></button>
+
+
+    <button class="open-button"  onclick="openForm()"><img src="chat.svg" alt="query-image" style="width: 25px;">   Feedback
+    </button>
+    <!-- Button trigger modal -->
+
+
+<button type="button" class="new-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Add Item"> 
+ <i class="far fa-plus" style="font-size: 30px;margin-top: 3px"></i>
+</button>
+
+<div class="chat-popup" id="myForm">
+  <div   class="form-container">
+    <label for="msg" style="color: #fff;padding:5px 10px 5px 10px;width:100%;text-align: center;"><b>Feedback</b></label>
+    <div>
+    <textarea placeholder="Send feedback..." id="msgtext"></textarea>
+    <button type="submit" id="succ-btn" class="btn" onclick="GiveFeedback()"><i class="fal fa-paper-plane"></i> &nbsp; Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()"><i class="fa fa-ban"></i> &nbsp; Close</button>
+    </div>
+  </div>
+</div>
+ <!--<footer   style="
+ position : absolute;
+    bottom : 0;
+    height : 40px;
+    margin-top : 40px;
+    text-align: center;"> sdfvg</footer>-->
+  </div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+<script src="DatabaseSdk.js">
+</script>
+
+    <script src="index.js"></script>
+  </body>
+</html>
